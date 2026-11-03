@@ -3,16 +3,16 @@
 ## Daniel, before handing off
 
 1. Create the private repo and push `main` (done by Daniel's Claude session).
-2. Create a **fine-grained token** owned by your account. GitHub only lets fine-grained tokens reach repos their creator owns, so Collin can't make this one.
+2. Create a **fine-grained token** owned by your account. GitHub only lets fine-grained tokens reach repos their creator owns, so Colin can't make this one.
    - Repository access: only `dory-loops`.
    - Permissions: Contents read/write, Issues read/write, Metadata read.
    - Expiry: about 14 days.
 
-   Send it to Collin privately. The agent's pushes and comments will show up under your account, and the agent marks its own comments so it never mistakes them for yours.
-3. Put Collin's GitHub login into `control.json` (`COLLIN_GITHUB_LOGIN`) and push.
+   Send it to Colin privately. The agent's pushes and comments will show up under your account, and the agent marks its own comments so it never mistakes them for yours.
+3. Put Colin's GitHub login into `control.json` (`COLLIN_GITHUB_LOGIN`) and push.
 4. Watch the repo on GitHub (Watch, then All activity) so status comments reach your email or phone.
 
-## Collin, before pasting
+## Colin, before pasting
 
 1. Make a parent directory with room for 100 GB. The agent creates `dory-loops/` and `artifacts/` inside it.
 2. Check Docker runs without sudo for your user: `docker run --rm hello-world`.

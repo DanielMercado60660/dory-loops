@@ -1,6 +1,6 @@
 # dory-loops
 
-Public research repo and pre-registration. It studies test-time compute in a looped language model, NVIDIA Nemotron Labs **Dory1.0-4B**, on one NVIDIA GB10 (DGX Spark). Experiments are run by a mostly unattended Claude Code agent on Collin's machine. Daniel follows and steers it through GitHub: the `runs` branch, `runs/STATUS.md`, and the "dory-loops status" issue.
+Public research repo and pre-registration. It studies test-time compute in a looped language model, NVIDIA Nemotron Labs **Dory1.0-4B**, on one NVIDIA GB10 (DGX Spark). Experiments are run by a mostly unattended Claude Code agent on Colin's machine. Daniel follows and steers it through GitHub: the `runs` branch, `runs/STATUS.md`, and the "dory-loops status" issue.
 
 ## Research question
 
@@ -52,9 +52,9 @@ Results live on the **`runs`** branch. `main` holds only the plan. Large files (
 |---|---|
 | Executing agent | Pins, gates, CIs, disk. Writes PREREG before results and REPORT after. Builds the synthetic task bank. Never touches the real holdout before Leg 5. |
 | Fresh review subagent | Leg 5 only: reads the frozen harness and holdout results without having seen development, and recommends promote or reject. |
-| Collin | Owns the GB10. Starts the session and decides how long it runs. |
+| Colin | Owns the GB10. Starts the session and decides how long it runs. |
 | Daniel | Answers blocking issues, updates the plan, checks the "verify first" list in the final report. |
 
 ## Budgets
 
-No fixed GPU-hour cap: it runs while Collin is away (a few days) and longer if he chooses. Disk: 100 GB total, including Docker images and caches. Both are logged in `runs/BUDGET.md`.
+No fixed GPU-hour cap: it runs while Colin is away (a few days) and longer if he chooses. Disk: 100 GB total, including Docker images and caches. Both are logged in `runs/BUDGET.md`.

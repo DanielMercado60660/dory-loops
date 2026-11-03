@@ -2,7 +2,7 @@
 
 Run the legs in order. Each leg ends at a GATE (see CLAUDE.md, Operating rules). All runtime numbers here are **guesses** made before any measurement. Replace them with Leg 0 measurements in each PREREG.
 
-There is no fixed GPU-hour cap. The run lasts until Collin stops it (see CLAUDE.md, Run window). Because it can end at any time, push results as they land, and size each leg so it produces a usable result early (slim pass first).
+There is no fixed GPU-hour cap. The run lasts until Colin stops it (see CLAUDE.md, Run window). Because it can end at any time, push results as they land, and size each leg so it produces a usable result early (slim pass first).
 
 ## Leg overview
 
@@ -69,7 +69,7 @@ Total guess: about 76 hours, roughly 3 days.
 - Prefer NeMo Evaluator (Docker is expected to work on GB10), using NVIDIA's published Nemotron Nano / Nemotron 3 configs as the template. Point it at the local vLLM endpoint.
 - If its images are not available for aarch64, fall back to NeMo Skills.
 - If neither works, stop and ask (don't hand-roll a scorer without approval).
-- GPQA on HF is gated. If `HF_TOKEN` is missing or lacks access, open a blocking issue asking Collin or Daniel to accept the terms on their HF account and provide a read-only `HF_TOKEN`.
+- GPQA on HF is gated. If `HF_TOKEN` is missing or lacks access, open a blocking issue asking Colin or Daniel to accept the terms on their HF account and provide a read-only `HF_TOKEN`.
 
 **Targets.**
 
