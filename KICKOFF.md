@@ -2,14 +2,14 @@
 
 ## Daniel, before handing off
 
-1. Create the private repo and push `main` (done by Daniel's Claude session).
+1. Done: public repo created, `main` pushed, issues limited to collaborators.
 2. Create a **fine-grained token** owned by your account. GitHub only lets fine-grained tokens reach repos their creator owns, so Colin can't make this one.
    - Repository access: only `dory-loops`.
    - Permissions: Contents read/write, Issues read/write, Metadata read.
    - Expiry: about 14 days.
 
    Send it to Colin privately. The agent's pushes and comments will show up under your account, and the agent marks its own comments so it never mistakes them for yours.
-3. Put Colin's GitHub login into `control.json` (`COLLIN_GITHUB_LOGIN`) and push.
+3. Colin's login (`ColinM-sys`) is in `control.json`. Invite him as a collaborator (repo Settings, Collaborators) and have him accept, or he can't open a STOP issue.
 4. Watch the repo on GitHub (Watch, then All activity) so status comments reach your email or phone.
 
 ## Colin, before pasting
