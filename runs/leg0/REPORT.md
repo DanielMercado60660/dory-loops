@@ -80,3 +80,27 @@ Evidence, on the GB10:
 - The hidden-state index mapping depends on the tuple layout.
 
 Scripts: `scripts/leg0/leg0_base_tf.py` (load, 4K forward, hidden-state count) and `scripts/leg0/parity_check.py` (top-5 logprob comparison against a vLLM endpoint).
+
+## Leg 3 base: both options tested (revised)
+
+The earlier decision (option a) was made before option (b) was built. Both are now tested with the same script, `scripts/leg0/compare_options.py`, against vLLM 0.33.0 at 4 loops, per_loop, over all 78 prompt positions of the 5 smoke prompts. vLLM's top-5 logprobs at each position are the reference.
+
+| Metric | (a) transformers PR `fcc6924` | (b) standalone port (`scripts/leg0/dory_standalone.py`) |
+|---|---|---|
+| Top-1 agreement with vLLM | 97.4% (76/78) | 98.7% (77/78) |
+| Logprob abs diff vs vLLM, mean | 0.063 | 0.043 |
+| Logprob abs diff vs vLLM, p99 | 0.465 | 0.241 |
+| Logprob abs diff vs vLLM, max | 0.834 | 0.388 |
+| Forward time, 5 prompts total (after warmup) | 1.36 s | 0.81 s |
+| Max abs logprob diff, (a) vs (b), full vocab | 1.76 | — |
+| Per-loop states | read from the returned tuple, index layout inferred | returned directly, no inference |
+| Load | 56 s | 56 s |
+| 4 loops on 4K tokens | 4.25 s incl. warmup, 14.4 GB peak | 5.74 s incl. warmup, 12.7 GB peak |
+
+Notes:
+- Both are close to vLLM on average. (b) is closer on every metric at this sample size, which is small: 78 positions, one checkpoint, one loop setting.
+- The largest (a)-vs-(b) gap (1.76 nats) is in the tail of the vocabulary; it has not been traced yet.
+- (a) depends on an open, unmerged PR; (b) is our code and needs maintaining, and it covers prefill only (no KV cache), which is all this comparison needs.
+- Both figures include warmup on the first call, so the timings are rough.
+
+**Recommendation: (b).** It agrees with vLLM more closely, returns per-loop states without any index inference, and does not depend on an unmerged PR. The cost is that we maintain the port, and it has to be verified again against the Leg 3 parity gate. **Final choice is Daniel's.**
