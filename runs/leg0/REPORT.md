@@ -56,3 +56,27 @@ I did not compare reasoning length between the default and `medium_effort`, so I
 - **Leg 3 base decision.** Needs Daniel's sign-off on the choice. My suggestion would be the BF16 checkpoint with vLLM 0.33.0 at loop 1 as the base, since it is the only stack that has run cleanly here. This is a suggestion, not a registered decision.
 - **Repeat the batched passes** if Daniel wants batched throughput as a result, with at least three repeats per setting.
 - **Judge the pilot outputs** (`runs/leg0/pilot/`) for the record, since they were not judged in the previous report. They are not used for the gate.
+
+## Leg 3 base decision
+
+**Chosen: option (a), `transformers` from PR huggingface/transformers#50099 pinned to SHA `fcc6924dfbac964f00787859b568c867ef5ad4cb`, BF16 checkpoint.** Installed in a separate venv (`venv_tf`, torch 2.14.0+cu130, transformers 5.23.0.dev0).
+
+Evidence, on the GB10:
+
+| Criterion (from EXPERIMENTS.md Leg 0 step 6) | Result |
+|---|---|
+| Loads the real checkpoint | PASS. Config model_type `dory`, 507 weights loaded, 56 s. |
+| Per-loop hidden states without invasive patches | PASS, with a caveat. No patch needed. The returned `hidden_states` tuple has 97 entries at 4 loops (37 at 1 loop, 57 at the default 2). The 20 recurrent-layer outputs repeat once per loop, so h_k can be read by index. This is read-only, but it relies on the tuple's layout, not a documented per-loop output. |
+| Runs 4 loops on a 4K-token sequence | PASS. Forward of 4096 tokens at 4 loops: 4.25 s on the first call (includes warmup), 14.4 GB peak GPU memory, logits finite. |
+| Numerical parity with vLLM (Leg 3 gate, checked early) | Close. Next-token top-5 logprobs at 4 loops, prompt "What is 17 * 23? Answer with just the number.": vLLM `</think>` −0.483, transformers −0.477; the other four tokens agree within 0.05 nats. One prompt, one position: this is a smoke check, not the Leg 3 gate. |
+
+**Option (b), a standalone PyTorch port of vLLM's `dory.py`: not built or tested.** The port is roughly 300 lines plus weight mapping and parity work. I chose (a) because it passes the criteria and is already close to vLLM on parity. If the hidden-state index mapping proves fragile, (b) is the fallback.
+
+**Efficiency comparison:** not run against (b), since (b) was not built. Among the (a) numbers, the 4K forward is 4.25 s at 4 loops including warmup, and I did not measure a steady-state time.
+
+**Risks of (a):**
+- PR #50099 is open and unmerged. The SHA pin keeps it reproducible, but the PR may change or be rejected upstream.
+- The PR's recurrence (`norm(h) + input`) differs in form from vLLM's (`justnorm(state + input_h)`). The top-5 check is close but covers one prompt and one position. The Leg 3 parity gate needs to test it across many positions and loops.
+- The hidden-state index mapping depends on the tuple layout.
+
+Scripts: `scripts/leg0/leg0_base_tf.py` (load, 4K forward, hidden-state count) and `scripts/leg0/parity_check.py` (top-5 logprob comparison against a vLLM endpoint).
