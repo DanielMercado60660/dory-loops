@@ -1,0 +1,7 @@
+{
+  "repo": "DanielMercado60660/dory-loops",
+  "allowed_logins": ["DanielMercado60660", "COLLIN_GITHUB_LOGIN"],
+  "status_issue_title": "dory-loops status",
+  "agent_marker": "<!-- dory-agent -->",
+  "poll_minutes": 10
+}

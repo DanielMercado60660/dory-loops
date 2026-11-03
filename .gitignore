@@ -1,0 +1,37 @@
+# Large or local-only files never go in git (see CLAUDE.md, Fences)
+artifacts/
+*.safetensors
+*.gguf
+*.bin
+*.pt
+*.pth
+*.ckpt
+*.npy
+*.npz
+*.h5
+*.arrow
+*.parquet
+*.tar
+*.tar.gz
+*.zip
+
+# Python
+__pycache__/
+*.pyc
+.venv/
+venv/
+.ipynb_checkpoints/
+
+# Large logs and raw dumps
+*.log
+logs/
+raw/
+generations/
+hidden_states/
+nohup.out
+wandb/
+
+# Secrets
+.env
+*.token
+holdout_ids.txt
