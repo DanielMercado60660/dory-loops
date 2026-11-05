@@ -107,4 +107,4 @@ Notes:
 
 ## Leg 3 base decision: (b)
 
-**Decision: option (b), the standalone port (`scripts/leg0/dory_standalone.py`).** Recorded 2026-11-04. Source: Daniel's choice as relayed by the operator in chat. It is not yet confirmed on the status issue, so this entry should be checked against his comment there.
+**Decision: option (b), the standalone port (`scripts/leg0/dory_standalone.py`).** Recorded 2026-11-04. Source: Daniel's choice, told to the operator by text message and relayed in chat. Not yet confirmed on GitHub.
