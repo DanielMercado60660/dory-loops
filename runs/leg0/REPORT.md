@@ -104,3 +104,7 @@ Notes:
 - Both figures include warmup on the first call, so the timings are rough.
 
 **Recommendation: (b).** It agrees with vLLM more closely, returns per-loop states without any index inference, and does not depend on an unmerged PR. The cost is that we maintain the port, and it has to be verified again against the Leg 3 parity gate. **Final choice is Daniel's.**
+
+## Leg 3 base decision: (b)
+
+**Decision: option (b), the standalone port (`scripts/leg0/dory_standalone.py`).** Recorded 2026-11-04. Source: Daniel's choice as relayed by the operator in chat. It is not yet confirmed on the status issue, so this entry should be checked against his comment there.

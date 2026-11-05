@@ -7,5 +7,5 @@ Updated by the executing agent at least every 2 hours while working.
 - **Running now:** nothing
 - **Last results:** Leg 0 registered run, 8 settings, 40/40 outputs coherent; see leg0/REPORT.md
 - **Disk used / GPU hours so far:** not measured (see leg0/REPORT.md)
-- **Next:** Daniel to choose the Leg 3 base (both options tested, see leg0/REPORT.md); repeat batched passes if wanted
-- **Open questions:** Leg 3 base choice; batched throughput noise
+- **Next:** Leg 1 PREREG for review; Leg 3 base is (b) per Daniel (relayed, confirm on issue #1)
+- **Open questions:** confirm (b) on issue #1; batched throughput noise
